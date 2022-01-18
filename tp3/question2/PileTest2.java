@@ -1,12 +1,12 @@
 package question2;
 
-public class PileTest extends junit.framework.TestCase {
+public class PileTest2 extends junit.framework.TestCase {
     private PileI p1;
     private PileI p2;
 
     public void setUp() {
-        p1 = new question2.Pile();
-        p2 = new question2.Pile();
+        p1 = new question2.Pile2();
+        p2 = new question2.Pile2();
     }
 
     public void test_Pile_capacite() {
@@ -14,7 +14,7 @@ public class PileTest extends junit.framework.TestCase {
     }
 
     public void test_Pile_estPleine() throws Exception {
-        PileI p = new question2.Pile(3);
+        PileI p = new question2.Pile2(3);
         p.empiler(3);
         assertEquals(1, p.taille());
         p.empiler(2);
@@ -33,7 +33,7 @@ public class PileTest extends junit.framework.TestCase {
     }
 
     public void test_Pile_sommet() throws Exception {
-        PileI p = new question2.Pile(3);
+        PileI p = new question2.Pile2(3);
         assertEquals(true, p.estVide());
 
         p.empiler(new Integer(3));
@@ -44,7 +44,7 @@ public class PileTest extends junit.framework.TestCase {
     }
 
     public void test_Pile_estVide() throws Exception {
-        PileI p = new question2.Pile(3);
+        PileI p = new question2.Pile2(3);
         assertEquals(true, p.estVide());
         try {
             Object r = p.depiler();
@@ -54,20 +54,9 @@ public class PileTest extends junit.framework.TestCase {
         }
     }
 
-    public void test_Pile_toString() throws Exception {
-        PileI pile1 = new question2.Pile(3);
-        assertEquals("toString incorrect ? ", "[]", pile1.toString());
-        pile1.empiler(4);
-        assertEquals("toString incorrect ? ", "[4]", pile1.toString());
-        pile1.empiler(5);
-        assertEquals("toString incorrect ? ", "[5, 4]", pile1.toString());
-        pile1.empiler(3);
-        assertEquals("toString incorrect ? ", "[3, 5, 4]", pile1.toString());
-
-    }
 
     public void test_Pile_TailleNegative() {
-        PileI p = new question2.Pile(-3);
+        PileI p = new question2.Pile2(-3);
         assertEquals(p.CAPACITE_PAR_DEFAUT, p.capacite());
 
     }

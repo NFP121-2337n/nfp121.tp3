@@ -11,6 +11,7 @@ public class Pile2 implements PileI {
 
     /** la capacite de la pile */
     private int capacite;
+    private int ptr;
 
     /**
      * Creation d'une pile.
@@ -21,25 +22,39 @@ public class Pile2 implements PileI {
     public Pile2(int taille) {
         // prevoir le cas <=0
         // a completer
+        if (taille < 0)
+            taille = CAPACITE_PAR_DEFAUT;
+        this.stk = new Stack<Object>();
+        stk.setSize(taille);
+        this.capacite=taille;
+        this.ptr = 0;
     }
 
     // constructeur fourni
     public Pile2() {
-        this(0);
+        this(CAPACITE_PAR_DEFAUT);
     }
 
     public void empiler(Object o) throws PilePleineException {
         // a completer
+        if (estPleine())
+            throw new PilePleineException();
+        this.stk.add(o);
+        this.ptr++;
     }
 
     public Object depiler() throws PileVideException {
-        // a completer
-        return null;
+        if (estVide())
+            throw new PileVideException();
+        this.ptr--;
+        return stk.pop();
     }
 
     public Object sommet() throws PileVideException {
+        if (estVide())
+            throw new PileVideException();
         // a completer
-        return null;
+        return stk.peek();
     }
 
     /**
@@ -49,7 +64,7 @@ public class Pile2 implements PileI {
      */
     public boolean estVide() {
         // a completer
-        return false;
+        return ptr==0;
     }
 
     /**
@@ -59,7 +74,7 @@ public class Pile2 implements PileI {
      */
     public boolean estPleine() {
         // a completer
-        return false;
+        return this.capacite == ptr;
     }
 
     /**
@@ -70,13 +85,18 @@ public class Pile2 implements PileI {
      */
     public String toString() {
         String s = "[";
-        // a completer
+        for (int i = ptr - 1; i >= 0; i--) {
+            s += stk.get(i);
+            if (i > 0)
+                s += ", ";
+        }
         return s + "]";
+
     }
 
     public boolean equals(Object o) {
         // a completer
-        return false;
+        return stk.equals(o);
     }
 
     // fonction fournie
@@ -91,7 +111,7 @@ public class Pile2 implements PileI {
      */
     public int taille() {
         // a completer
-        return 0;
+        return ptr;
     }
 
     /**
@@ -101,7 +121,7 @@ public class Pile2 implements PileI {
      */
     public int capacite() {
         // a completer
-        return 0;
+        return this.capacite;
     }
 
 } // Pile2.java

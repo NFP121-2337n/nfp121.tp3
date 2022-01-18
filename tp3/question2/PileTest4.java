@@ -1,12 +1,12 @@
 package question2;
 
-public class PileTest extends junit.framework.TestCase {
+public class PileTest4 extends junit.framework.TestCase {
     private PileI p1;
     private PileI p2;
 
     public void setUp() {
-        p1 = new question2.Pile();
-        p2 = new question2.Pile();
+        p1 = new question2.Pile4();
+        p2 = new question2.Pile4();
     }
 
     public void test_Pile_capacite() {
@@ -72,5 +72,22 @@ public class PileTest extends junit.framework.TestCase {
 
     }
 
+    public void test_Pile_equals() throws Exception {
 
+        p1.empiler(3);
+        p1.empiler(2);
+        p1.empiler(1);
+
+        p2.empiler(3);
+        p2.empiler(2);
+        p2.empiler(1);
+
+        assertTrue("egalite de deux piles ? ", p1.equals(p2));
+        assertTrue("egalite de deux piles ? ", p2.equals(p1));
+        assertTrue("egalite de deux piles ? ", p1.equals(p1));
+
+        p2.empiler(1);
+        assertFalse("égalité de deux piles ? ", p1.equals(p2));
+
+    }
 }
